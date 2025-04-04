@@ -1,24 +1,26 @@
 import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
-import PostItImage from '@/assets/images/post-it.jpg';
+import PostItImage from "@/assets/images/post-it.jpg";
 import { useRouter } from "expo-router";
 
 const HomeScreen = () => {
   const router = useRouter();
-  
+
   return (
     <View style={styles.container}>
-      <Image source={ PostItImage } style={styles.image} />
+      <Image source={PostItImage} style={styles.image} />
       <Text style={styles.title}>Welcome To Notes App</Text>
-      <Text style={styles.subtitle}>Capture your thoughts anytime anywhere</Text>
+      <Text style={styles.subtitle}>
+        Capture your thoughts anytime anywhere
+      </Text>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => router.push('/notes')}
+        onPress={() => router.push("/notes")}
       >
         <Text style={styles.buttonText}>GetStarted</Text>
       </TouchableOpacity>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -26,7 +28,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
-    backgroundColor: '#f8f9fa'
+    backgroundColor: "#f8f9fa",
   },
   image: {
     width: 100,
@@ -36,27 +38,27 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 28,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 10,
-    color: '#333'
+    color: "#333",
   },
   subtitle: {
     fontSize: 15,
-    color: '#555',
-    textAlign: 'center',
+    color: "#555",
+    textAlign: "center",
     marginBottom: 20,
   },
   button: {
-    backgroundColor: '#007bff',
+    backgroundColor: "#007bff",
     paddingVertical: 12,
     paddingHorizontal: 25,
     borderRadius: 8,
-    alignItems: 'center',
+    alignItems: "center",
   },
   buttonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
 });
 
