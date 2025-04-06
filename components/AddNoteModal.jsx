@@ -29,7 +29,7 @@ const AddNoteModal = ({
             placeholder="Enter note..."
             placeholderTextColor="#aaa"
             value={newNote}
-            onChange={setNewNote}
+            onChangeText={setNewNote}
           />
           <View style={styles.modalButtons}>
             <TouchableOpacity
