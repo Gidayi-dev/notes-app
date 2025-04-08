@@ -7,6 +7,7 @@ import {
   Modal,
   TextInput,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import NoteList from "@/components/NoteList";
 import AddNoteModal from "@/components/AddNoteModal";
@@ -39,21 +40,31 @@ const NoteScreen = () => {
   };
 
   // Add New Note
-  const addNote = () => {
+  const addNote = async () => {
     if (newNote.trim() === "") return;
 
-    setNotes((prevNotes) => [
-      ...prevNotes,
-      { id: Date.now().toString(), text: newNote },
-    ]);
+    const response = await noteService.addNote(newNote);
 
+    if (response.error) {
+      Alert.alert('Error', response.error);
+    } else {
+      setNotes(prevNotes => [...prevNotes, response.data]);
+    }
+    
     setNewNote("");
     setModalVisible(false);
   };
 
   return (
     <View style={styles.container}>
-      <NoteList notes={notes} />
+      { loading ? (
+        <ActivityIndicator size='large' color='#007bff' />
+      ) : (
+        <>
+          { error && <Text style={styles.errorText}>{error}</Text> }
+          <NoteList notes={notes}/>
+        </>
+      ) }
       <TouchableOpacity
         style={styles.addButton}
         onPress={() => setModalVisible(true)}
@@ -92,6 +103,12 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 18,
     fontWeight: "bold",
+  },
+  errorText: {
+    color: 'red',
+    textAlign: 'center',
+    marginBottom: 10,
+    fontSize: 15,
   },
 });
 
