@@ -1,10 +1,16 @@
+import { useState, useRef } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 const NoteItem = ({ note, onDelete }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedText, setEditedText] = useState(note.text);
+  const inputRef = useRef(null);
+
   return (
     <View style={styles.noteItem}>
+      {}
       <Text style={styles.noteText}>{note.text}</Text>
-      <TouchableOpacity onPress={ () => onDelete(note.$id) }>
+      <TouchableOpacity onPress={() => onDelete(note.$id)}>
         <Text style={styles.delete}>❌</Text>
       </TouchableOpacity>
     </View>
@@ -25,8 +31,8 @@ const styles = StyleSheet.create({
   },
   delete: {
     fontSize: 18,
-    color: 'red'
-  }
+    color: "red",
+  },
 });
 
 export default NoteItem;

@@ -30,7 +30,7 @@ const NoteScreen = () => {
 
     if (response.error) {
       setError(response.error);
-      Alert.alert('Error', response.error);
+      Alert.alert("Error", response.error);
     } else {
       setNotes(response.data);
       setError(null);
@@ -46,48 +46,47 @@ const NoteScreen = () => {
     const response = await noteService.addNote(newNote);
 
     if (response.error) {
-      Alert.alert('Error', response.error);
+      Alert.alert("Error", response.error);
     } else {
-      setNotes(prevNotes => [...prevNotes, response.data]);
+      setNotes((prevNotes) => [...prevNotes, response.data]);
     }
-    
+
     setNewNote("");
     setModalVisible(false);
   };
 
   // Delete Note
   const deleteNote = async (id) => {
-    Alert.alert('Delete Note', 'Are you sure you want to delete this note?', 
-      [
-        {
-          text: 'Cancel',
-          style: 'cancel'
-        },
-        {
-          text: 'Delete',
-          style: 'destructive',
-          onPress: async () => {
-            const response = await noteService.deleteNote(id);
-            if (response.error) {
-              Alert.alert('Error', response.error);
-            } else {
-              setNotes(notes.filter((note) => note.$id !== id));
-            }
+    Alert.alert("Delete Note", "Are you sure you want to delete this note?", [
+      {
+        text: "Cancel",
+        style: "cancel",
+      },
+      {
+        text: "Delete",
+        style: "destructive",
+        onPress: async () => {
+          const response = await noteService.deleteNote(id);
+          if (response.error) {
+            Alert.alert("Error", response.error);
+          } else {
+            setNotes(notes.filter((note) => note.$id !== id));
           }
-        }
-      ])
-  }
+        },
+      },
+    ]);
+  };
 
   return (
     <View style={styles.container}>
-      { loading ? (
-        <ActivityIndicator size='large' color='#007bff' />
+      {loading ? (
+        <ActivityIndicator size="large" color="#007bff" />
       ) : (
         <>
-          { error && <Text style={styles.errorText}>{error}</Text> }
-          <NoteList notes={notes} onDelete={deleteNote}/>
+          {error && <Text style={styles.errorText}>{error}</Text>}
+          <NoteList notes={notes} onDelete={deleteNote} />
         </>
-      ) }
+      )}
       <TouchableOpacity
         style={styles.addButton}
         onPress={() => setModalVisible(true)}
@@ -128,8 +127,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   errorText: {
-    color: 'red',
-    textAlign: 'center',
+    color: "red",
+    textAlign: "center",
     marginBottom: 10,
     fontSize: 15,
   },
