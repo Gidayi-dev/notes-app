@@ -1,5 +1,11 @@
 import { useState, useRef } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, TextInput } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput,
+} from "react-native";
 
 const NoteItem = ({ note, onDelete, onEdit }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -7,7 +13,7 @@ const NoteItem = ({ note, onDelete, onEdit }) => {
   const inputRef = useRef(null);
 
   const handleSave = () => {
-    if (editedText.trim() === '') return;
+    if (editedText.trim() === "") return;
     onEdit(note.$id, editedText);
     setIsEditing(false);
   };
@@ -15,24 +21,26 @@ const NoteItem = ({ note, onDelete, onEdit }) => {
   return (
     <View style={styles.noteItem}>
       {isEditing ? (
-        <TextInput 
+        <TextInput
           ref={inputRef}
           style={styles.input}
           value={editedText}
           onChangeText={setEditedText}
           autoFocus
           onSubmitEditing={handleSave}
-          returnKeyType='done'
+          returnKeyType="done"
         />
       ) : (
         <Text style={styles.noteText}>{note.text}</Text>
       )}
       <View style={styles.actions}>
         {isEditing ? (
-          <TouchableOpacity onPress={() => {
-            handleSave();
-            inputRef.current?.blur();
-          }}>
+          <TouchableOpacity
+            onPress={() => {
+              handleSave();
+              inputRef.current?.blur();
+            }}
+          >
             <Text style={styles.edit}>🖨</Text>
           </TouchableOpacity>
         ) : (
@@ -65,12 +73,12 @@ const styles = StyleSheet.create({
     color: "red",
   },
   actions: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   edit: {
     fontSize: 18,
     marginRight: 10,
-    color: 'blue',
+    color: "blue",
   },
   input: {
     fontSize: 18,
