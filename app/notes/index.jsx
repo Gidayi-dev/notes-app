@@ -27,7 +27,7 @@ const NoteScreen = () => {
 
   useEffect(() => {
     if (!authLoading && !user) {
-      router.replace('/auth');
+      router.replace("/auth");
     }
   }, [user, authLoading]);
 
@@ -35,7 +35,6 @@ const NoteScreen = () => {
     if (user) {
       fetchNotes();
     }
-    
   }, [user]);
 
   const fetchNotes = async () => {
